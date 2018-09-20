@@ -12,9 +12,10 @@ var logger = new (winston.Logger)({
       formatter: function(options) {
         try{
         // console.log(options);
-        const line = new Error().stack.split('\n').slice(2).find(i => !i.includes('winston') && !(i.includes('blair') && i.includes('node_modules')));
+        const line = new Error().stack.split('\n').slice(-1)[0];
         const filename = line.split('/').slice(-1)[0].split(')')[0];
-        const func = line.trim().split(' ')[1];
+        const lineargs = line.trim().split(' ');
+        const func = lineargs.length > 2 ? lineargs[1] : '';
         // console.log(new Error());
         const metaString = options.meta && options.meta.message && options.meta.stack ? (function(){
           return `${options.meta.message} \n ${options.meta.stack}`;
