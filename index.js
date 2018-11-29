@@ -12,7 +12,7 @@ var logger = new (winston.Logger)({
       formatter: function(options) {
         try{
         // console.log(options);
-        const line = new Error().stack.split('\n').slice(-1)[0];
+        const line = new Error().stack.split('\n')[10];
         const filename = line.split('/').slice(-1)[0].split(')')[0];
         const lineargs = line.trim().split(' ');
         const func = lineargs.length > 2 ? lineargs[1] : '';
